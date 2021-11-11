@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
 from usuarios.views import *
 from interface.views import *
+from venta.views import *
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,7 +37,20 @@ urlpatterns = [
     path('home/Capacitores.html', capacitores, name='Capacitores'),
     path('home/Transistores.html', transistores, name='Transistores'),
     path('home/Motores.html', motores, name='Motores'),
-    
+    path('account/Arduino.html', arduino, name='Arduino'),
+    path('account/Resistencias.html', resistencias, name='Resistencias'),
+    path('account/Capacitores.html', capacitores, name='Capacitores'),
+    path('account/Transistores.html', transistores, name='Transistores'),
+    path('account/Motores.html', motores, name='Motores'),
+    path('home/carrito.html', Listarcarrito),
+    path('carrito/', Listarcarrito),
+    path('carrito1/', Listarcarrito1),
+    path('account/carrito.html', Listarcarrito1, name='carrito1'),
+    path('<slug:username>/producto/<int:id>', agregar_carrito),
+    path('account/eliminacionProducto/<int:id>', eliminar_carrito),
+    path('carrito1/eliminacionProducto/<int:id>', eliminar_carrito),
+    path('checkout/', FinalizarCompra),
+    path('me/', login_required(OrderList.as_view(), login_url='/autenticacion/acceder'), name='order_list'),
 ]
 
 if settings.DEBUG:

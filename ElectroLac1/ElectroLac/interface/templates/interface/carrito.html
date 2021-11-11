@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		 <!-- ETIQUETAS REFERENCIALES -->
+	    <meta name="description" content="Tienda Online de Tecnología y Más.">
+	    <meta name="keywords" content="tienda, compras, precio, ventas, ecomerce, comercio, online, store, TEM, tecnología, accesorios,
+	    computadoras, impresoras, arduino, cables, teclados, mouses, keyboard, laptop">
+
+	    <meta http-equiv="author" content="Abdias Alvarado">
+
+		<title>Tienda Nomnre-Componentes Electrónicos</title>
+
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="{% static 'css\font-awesome.min.css' %}">
+
+		<!-- Hoja de estilo personalizada -->
+		<link type="text/css" rel="stylesheet" href="{% static 'css\custom.css' %}"/>
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
+			<div id="encabezado-superior">
+				<div class="container">
+					<ul class="header-links pull-left">
+						<li><a><i class="fa fa-phone"></i> +502 xxxx-xxxx</a></li>
+						<li><a href="modificarcorreo@gmail.com"><i class="fa fa-envelope-o"></i> nuestro@gmail.com</a></li>
+						<li><a href="colocar direccion maps"><i class="fa fa-map-marker"></i> Ciudad de Guatemala</a></li>
+					</ul>
+					<ul class="header-links pull-right">
+						<li><a href="{% url 'login' %}"><i class="fa fa-user-o"></i> Login</a></li> 
+					</ul>
+				</div>
+			</div>
+
+			<div id="header">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="index.html" class="logo">
+									<img src="{% static 'img/logo.png' %}" alt="Logo TEM Store" width="50px">
+									ElectroLac
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<div id="responsive-nav">
+					<ul class="main-nav nav navbar-nav">
+					{% if user.is_authenticated %}
+						<li class="active"><a href="{% url 'account' %}">Inicio</a></li>
+					{%else%}
+						<li class="active"><a href="{% url 'home' %}">Inicio</a></li>
+					{% endif %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+
+ {% if user.is_authenticated %}
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th class="text-center">Precio</th>
+                        <th class="text-center">Subtotal</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in carrito%}
+                    <tr>
+                        <td class="col-sm-8 col-md-6">
+                        <div class="media">
+                            <a class="thumbnail pull-left"> <img class="media-object" src="{{ c.get_photo_url }}" style="width: 72px; height: 72px;"> </a>
+                            <div class="media-body">
+                                <h4 class="align-middle"><a> {{c.producto}}</a></h4>
+                                <!--<span>Status: </span><span class="text-success"><strong>In Stock</strong></span>-->
+                            </div>
+                        </div></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{c.cantidad}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>Q{{c.precio}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>Q{{c.precio}}</strong></td>
+                        <td class="col-sm-1 col-md-1">
+                        <a href="eliminacionProducto/{{c.id}}" class="btn btn-sm btn-block btn-danger">Eliminar</a>
+                        {%endfor%}
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong>Q{{total_carrito}}</strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+                            <a class="btn btn-outline-info" href="/productos" role="button">Regresar</a>
+                             
+                        </button></td>
+                        <td>
+                        <a href="/checkout" class="btn" style="color:white; background:rgb(255, 0, 140)" >Checkout</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endif%}
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categorías</h3>
+								<ul class="footer-links">
+
+									{% for category in categorys %}
+										<li><a href="{{category}}.html">{{category}}</a></li>
+									{% endfor %}
+
+									<!-- <li><a href="proyectos.html">Proyectos</a></li>
+									<li><a href="microcontroladores.html">Microcontroladores</a></li>
+									<li><a href="electronica.html">Electrónica</a></li>
+									<li><a href="arduino.html">Arduino</a></li>
+									<li><a href="bocinas.html">Bocinas</a></li> -->
+
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Información</h3>
+								<ul class="footer-links">
+									<li><a href="sobrenosotros.html">Sobre Nosotros</a></li>
+									<li><a href="contactanos.html">Contáctanos</a></li>
+									<li><a href="politicasdeprivacidad.html">Políticas de Privacidad</a></li>
+									<li><a href="terminosycondiciones.html">Términos y Condiciones</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Clientes</h3>
+								<ul class="footer-links">
+									<li><a href="usuario.html">Mi Cuenta</a></li>
+									<li><a href="carrito.html">Ver Carrito</a></li>
+									<li><a href="listadeseos.html">Lista de Deseos</a></li>
+									<li><a href="ayuda.html">Ayuda</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="copyright">
+								Copyright &copy; 2021
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- /FOOTER -->
+
+
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+
+	</body>
+</html>

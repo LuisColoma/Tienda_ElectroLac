@@ -43,3 +43,21 @@ class Carrito(models.Model):
 
     def __str__(self):
         return f'{self.cliente}'
+
+    @property
+    def get_photo_url(self):
+        if self.photo  and hasattr(self.photo , 'url'):
+            return self.photo.url
+        else:
+            return "/static/img/not_available.png"
+
+class Venta(models.Model):
+    cliente = models.CharField(max_length=50, default="")
+    nit = models.CharField(max_length=10, default="")
+    direccion = models.CharField(max_length=50, default="")
+    total = models.DecimalField(max_digits=6, decimal_places=2)
+    forma_pago = models.CharField(max_length=100,choices=[    ('Debito_Credito', 'Tarjeta de Débito o Credito'), ('Efectivo', 'Pago Contra Entrega')], default='efectivo')
+    entrega = models.DateTimeField()
+
+    def productos_carrito(self):
+        return self.productos.all()

@@ -48,7 +48,7 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="index.html" class="logo">
+								<a href={% url 'home' %} class="logo">
 									<img src="{% static 'img/logo.png' %}" alt="Logo TEM Store" width="50px">
 									ElectroLac
 								</a>
@@ -124,7 +124,7 @@
 			<div class="container">
 				<div id="responsive-nav">
 					<ul class="main-nav nav navbar-nav">
-							<li class="active"><a href="index.html">Inicio</a></li>
+							<li class="active"><a href={% url 'home' %}>Inicio</a></li>
 
 						{% for category in categorys %}
 							<li><a href="{{category}}.html">{{category}}</a></li>

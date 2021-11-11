@@ -39,8 +39,9 @@
 						<li><a href="colocar direccion maps"><i class="fa fa-map-marker"></i> Ciudad de Guatemala</a></li>
 					</ul>
 					<ul class="header-links pull-right">
+						<li><a href=><i class="fa fa-user-o"></i>  Bienvenido, {{ user.username }} </a></li>
+						<li><a href=><i class="fa fa-check-circle" aria-hidden="true"></i>  Mis Ordenes </a></li>
 						<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
-						<li><a href=><i class="fa fa-user-o"></i>  Bienvenido, {user.username} </a></li>
 					</ul>
 				</div>
 			</div>
@@ -50,7 +51,7 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="index.html" class="logo">
+								<a href={% url 'home' %} class="logo">
 									<img src="{% static 'img/logo.png' %}" alt="Logo TEM Store" width="50px">
 									ElectroLac
 								</a>
@@ -89,9 +90,16 @@
 
 								<!-- Carrito -->
 								<div class="dropdown">
+								{% if user.is_authenticated %}
 									<a href="carrito.html" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Carrito</span>
+										</a>
+								{%else%}
+									<a href="carrito.html" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart"></i>
+										<span>Carrito</span>
+								{% endif %}								
 									</a>
 								</div>
 								<!-- /Carrito -->
@@ -118,7 +126,7 @@
 			<div class="container">
 				<div id="responsive-nav">
 					<ul class="main-nav nav navbar-nav">
-							<li class="active"><a href={% url 'home' %}>Inicio</a></li>
+							<li class="active"><a href={% url 'account' %}>Inicio</a></li>
 
 						{% for category in categorys %}
 							<li><a href="{{category}}.html">{{category}}</a></li>
@@ -157,7 +165,11 @@
 										<h5 class="product-stock">Disponibilidad: {{product.stock}}</h5>
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
-											<button class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
+										{% if user.is_authenticated %}
+											 	<a class="btn btn-dark my-2" href="/{{ user.username }}/producto/{{ product.id }}" role="button">Agregar al carrito</a> 
+										{%else%}
+												<a class="btn btn-dark my-2" href="/login" role="button">Agregar al carrito</a> 
+										{% endif %}
 										</div>
 								</div>
 							</div>
