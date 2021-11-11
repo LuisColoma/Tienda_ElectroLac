@@ -1,0 +1,218 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>{{title}}</title>
+
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+		
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="{% static 'css\font-awesome.min.css' %}">
+
+		<!-- Hoja de estilo personalizada -->
+		<link type="text/css" rel="stylesheet" href="{% static 'css\custom.css' %}"/>
+
+		<script scr="{% static 'lib/sweetalert2-9.10.0/sweetalert2.all.min.js' %}"></script>
+
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
+			<div id="encabezado-superior">
+				<div class="container">
+					<ul class="header-links pull-left">
+						<li><a><i class="fa fa-phone"></i> +502-xxxx-xxxx</a></li>
+						<li><a href="mailto:@gmail.com"><i class="fa fa-envelope-o"></i> @gmail.com</a></li>
+						<li><a href="direccion aca"><i class="fa fa-map-marker"></i> Ciudad de Guatemala</a></li>
+					</ul>
+					<ul class="header-links pull-right">
+						<!--
+						<li><a href="{% url 'login' %}"><i class="fa fa-user-o"></i> Usuario</a></li>-->
+						<li><a href="{% url 'registrar' %}"><i class="fa fa-user-o"></i> Registrar</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="header">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="index.html" class="logo">
+									<img src="{% static 'img/logo.png' %}" alt="Logo TEM Store" width="50px">
+									ElectroLac
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<div id="responsive-nav">
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="{% url 'home' %}">Inicio</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+
+
+		<!-- USUARIO -->
+		<div class="contenedor-formulario">
+			<div class="formulario-ingreso">
+				<form action="." method="POST">
+					{% csrf_token %}
+					<div class="imagen-usuario">
+						<img src="{% static 'img/usuario.png' %}"   alt="AVATAR">
+					</div>
+					<div class="section-title text-center">
+						<h3 class="title">Iniciar Sesión</h3>
+					</div>
+					<span class="titulo-ingreso">
+						Ingreso de Usuario
+					</span>
+
+					<div class="campo-texto" data-validate = "Usuario requerido">
+						{{ form.username | add_class:'form-control' | attr:'autocomplete:off' | attr:'placeholder:Ingrese su usuario'}}
+						<span></span>
+					</div>
+
+					<div class="campo-texto" data-validate = "Contraseña requerida">
+						{{ form.password|add_class:'form-control'| attr:'autocomplete:off' | attr:'placeholder:Ingrese su contraseña'}}
+						 <span </span>
+					</div>
+
+					<div>
+						<button class="boton-ingresar">
+							Ingresar
+						</button>
+					</div>
+
+					<div class="crear-cuenta">
+						<a href="#">
+							¿Aún no tienes una cuenta? | Crear una cuenta
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<script type="application/javascript">
+			{% if form.errors %}
+				var errors = '';
+  				{% for field in form %}
+    				{% for error in field.errors %}
+      					errors += '{{ error }}\n';
+    				{% endfor %}
+  				{% endfor %}
+  				{% for error in form.non_field_errors %}
+    				errors += '{{ error }}\n';
+  				{% endfor %}
+  				Swal.fire({
+    				title: 'ERROR',
+    				text: 'Por favor, introduzca un nombre de usuario y contraseña correctos. Considere que ambos campos son sensibles al uso de mayúsculas.',
+    				icon: 'error'
+  				});
+			{% endif %}
+		</script>
+		<!-- /USUARIO -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Sobre Nosotros</h3>
+								<p>Nos dedicamos a ofrecerte los mejores productos al mejor precio. Contamos con
+								sistema de pedidos hacia proveedores en linea.</p>
+								<ul class="footer-links">
+									<li><a href="https://goo.gl/maps/N4Cdk8s9FdN2"><i class="fa fa-map-marker"></i>2 Calle SO, Bo. San Juan</a></li>
+									<li><a><i class="fa fa-phone"></i>+504 8882-2467</a></li>
+									<li><a href="mailto:temstorehn@gmail.com"><i class="fa fa-envelope-o"></i> temstorehn@gmail.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categorías</h3>
+								<ul class="footer-links">
+									<li><a href="computadoras.html">Computadoras</a></li>
+									<li><a href="celulares.html">Celulares</a></li>
+									<li><a href="electronica.html">Electrónica</a></li>
+									<li><a href="accesorios.html">Accesorios</a></li>
+									<li><a href="impresoras.html">Impresoras</a></li>
+									<li><a href="camaras.html.">Cámaras</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Información</h3>
+								<ul class="footer-links">
+									<li><a href="sobrenosotros.html">Sobre Nosotros</a></li>
+									<li><a href="contactanos.html">Contáctanos</a></li>
+									<li><a href="politicasdeprivacidad.html">Políticas de Privacidad</a></li>
+									<li><a href="terminosycondiciones.html">Términos y Condiciones</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Clientes</h3>
+								<ul class="footer-links">
+									<li><a href="usuario.html">Mi Cuenta</a></li>
+									<li><a href="carrito.html">Ver Carrito</a></li>
+									<li><a href="listadeseos.html">Lista de Deseos</a></li>
+									<li><a href="ayuda.html">Ayuda</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="copyright">
+								Copyright &copy; 2018 Todos los derechos reservados. | Abdias Alvarado
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- /FOOTER -->
+
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+
+	</body>
+</html>

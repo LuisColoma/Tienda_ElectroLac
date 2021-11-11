@@ -1,0 +1,244 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>TIENDA - Tecnología, Electrónica y Más</title>
+
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+		
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="{% static 'css\font-awesome.min.css' %}">
+
+		<!-- Hoja de estilo personalizada -->
+		<link type="text/css" rel="stylesheet" href="{% static 'css\custom.css' %}"/>
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
+			<div id="encabezado-superior">
+				<div class="container">
+					<ul class="header-links pull-left">
+						<li><a><i class="fa fa-phone"></i> +502-xxxx-xxxx</a></li>
+						<li><a href="mailto:@gmail.com"><i class="fa fa-envelope-o"></i> @gmail.com</a></li>
+						<li><a href="direccion aca"><i class="fa fa-map-marker"></i> Ciudad de Guatemala</a></li>
+					</ul>
+					<ul class="header-links pull-right">
+						<li><a href="{% url 'login' %}"><i class="fa fa-user-o"></i> Iniciar Sesión</a></li>
+					<!-- <li><a href="registrar.html"><i class="fa fa-user-o"></i> Registrar</a></li> -->
+					</ul>
+				</div>
+			</div>
+
+			<div id="header">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="index.html" class="logo">
+									<img src="{% static 'img/logo.png' %}" alt="Logo TEM Store" width="50px">
+									ElectroLac
+								</a>
+							</div>
+						</div>
+
+
+						<!-- USUARIO -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn">
+								<!-- Deseos -->
+
+								<!-- Menu Toogle -->
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="fa fa-bars"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								<!-- /Menu Toogle -->
+							</div>
+						</div>
+						<!-- /USUARIO-->
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- /HEADER -->
+
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<div id="responsive-nav">
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="{% url 'home' %}">Inicio</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- USUARIO -->
+		<div class="contenedor-formulario">
+			<div class="formulario-ingreso">
+
+				{% block title %}{% endblock %}
+				{% load crispy_forms_tags %}
+				
+				{% block content %}
+					<form action="#" method="post" enctype = "multipart/form-data">
+						<div class="imagen-usuario">
+							<img src="{% static 'img/usuario.png' %}" alt="AVATAR">
+						</div>
+						<div class="section-title text-center">
+							<h3 class="title">Crear Cuenta</h3>
+						</div>
+						<span class="titulo-ingreso">
+							Registrar de Usuario
+						</span>
+                        {% csrf_token %}
+                        <div class="form-group col-lg-12">
+                            <label>Nombre de Usuario: </label>
+                            <input type="text" name="username" class="form-control" placeholder="Username" required>
+                        </div>
+                        
+                        <div class="form-group col-lg-6">
+                            <label>Nombres: </label>
+                            <input type="text" name="first_name" class="form-control" placeholder="Nombres" required>
+                        </div>
+                        
+                        <div class="form-group col-lg-6">
+                            <label>Apellidos: </label>
+                            <input type="text" name="last_name" class="form-control" placeholder="Apellidos" required>
+                        </div>
+                                        
+                        <div class="form-group col-lg-12">
+                            <label>Email: </label>
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        
+                        <div class="form-group col-lg-6">
+                            <label>Edad: </label>
+                            <input type="number" name="edad" class="form-control" placeholder="Edad", min="18" required>
+                        </div>			
+                        
+                        <div class="form-group col-lg-6">
+                            <label>Rol: </label>
+                            <input type="text" name="type" class="form-control" placeholder="Admin, Ventas, Reporte" required>
+                        </div>	
+
+                        {{ form.as_p}}
+
+                        <div class="form-group col-lg-12">
+                            <label>Contraseña: </label>
+                            <input type="password" name="password" class="form-control" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*?[~`!@#$%\^&*()\-_=+[\]{};:\x27.,\x22\\|/?><]).{12,}">
+                        </div>	
+
+						<button type="submit" class="btn btn-success">Registrar</button>
+
+                        <div>
+                            {% for message in messages %}
+                            <label>{{message}}</label>
+                            {% endfor %}
+                        </div>   
+
+                    </form>
+					</form>
+				{% endblock %}
+				
+			</div>
+		</div>
+
+		<!-- /USUARIO -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Sobre Nosotros</h3>
+								<p>Nos dedicamos a ofrecerte los mejores productos al mejor precio. Contamos con
+								sistema de pedidos hacia proveedores en linea.</p>
+								<ul class="footer-links">
+									<li><a href="Direccions"><i class="fa fa-map-marker"></i>Ciudad de Guatemala</a></li>
+									<li><a><i class="fa fa-phone"></i>+504 8882-2467</a></li>
+									<li><a href="mailto:ss@gmail.com"><i class="fa fa-envelope-o"></i> @gmail.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categorías</h3>
+								<ul class="footer-links">
+									<li><a href="proyectos.html">Proyectos</a></li>
+									<li><a href="microcontroladores.html">Microcontroladores</a></li>
+									<li><a href="electronica.html">Electrónica</a></li>
+									<li><a href="arduino.html">Arduino</a></li>
+									<li><a href="bocinas.html">Bocinas</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Información</h3>
+								<ul class="footer-links">
+									<li><a href="sobrenosotros.html">Sobre Nosotros</a></li>
+									<li><a href="contactanos.html">Contáctanos</a></li>
+									<li><a href="politicasdeprivacidad.html">Políticas de Privacidad</a></li>
+									<li><a href="terminosycondiciones.html">Términos y Condiciones</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Clientes</h3>
+								<ul class="footer-links">
+									<li><a href="usuario.html">Mi Cuenta</a></li>
+									<li><a href="carrito.html">Ver Carrito</a></li>
+									<li><a href="listadeseos.html">Lista de Deseos</a></li>
+									<li><a href="ayuda.html">Ayuda</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="copyright">
+								Copyright &copy; 2021
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- /FOOTER -->
+
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+
+	</body>
+</html>
+
+
+
