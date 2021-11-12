@@ -10,3 +10,13 @@ class Usuario(AbstractUser):
     edad = models.PositiveIntegerField(default=18)
     photo = models.ImageField(blank = True, null = True)
     type = models.CharField(max_length=10, default="")
+
+    def __str__(self):
+        return self.username
+
+    @property
+    def get_photo_url(self):
+        if self.photo  and hasattr(self.photo , 'url'):
+            return self.photo.url
+        else:
+            return "/static/img/not_available.png"

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from venta.models  import Product, Category
 from django.contrib import auth
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from usuarios.models import Usuario
 
 # Create your views here.
 def home(request):
@@ -54,3 +55,9 @@ def transistores(request):
 
 def orders(request):
     return render(request, 'interface/transistores.html')
+
+def perfil(request):
+    categorys = Category.objects.all()
+    informacion = Usuario.objects.all()
+    context = {'informacion': informacion,'categorys': categorys}
+    return render(request, 'interface/perfil.html', context)

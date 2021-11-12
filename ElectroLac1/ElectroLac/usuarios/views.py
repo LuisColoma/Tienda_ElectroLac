@@ -13,12 +13,12 @@ def registroadmin(request):
         username = request.POST['username']
         email = request.POST['email']
         edad = request.POST['edad']
-        #photo = request.POST['photo']
+        photo = request.POST.get('photo')
         password = request.POST['password']
         type = request.POST['type']
         form = UsuariosForm(request.POST, request.FILES)
-        #if form.is_valid():
-                #photo = form.cleaned_data.get("photo")
+        if form.is_valid():
+                photo = form.cleaned_data.get("photo")
 
         if Usuario.objects.filter(username=username).exists():
             messages.info(request, 'El nombre de usuario "Username" ya existe')
@@ -27,7 +27,7 @@ def registroadmin(request):
             messages.info(request, 'El correo "Email" ya fue registrado anteriormente')
             return redirect('/account')
         else:
-            user = Usuario.objects.create_user(username = username, password = password, email=email, first_name=first_name, last_name=last_name, edad=edad, type=type)
+            user = Usuario.objects.create_user(username = username, password = password, email=email, first_name=first_name, last_name=last_name, edad=edad, type=type, photo=photo)
             user.save();
             messages.info(request, 'El nuevo usuario ha sido registrado exitosamente')
             print("Usuario registrado")

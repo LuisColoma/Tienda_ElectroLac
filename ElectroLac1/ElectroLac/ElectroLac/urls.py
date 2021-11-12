@@ -31,6 +31,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='interface/login.html'), name='login'),
     path("logout/", LogoutView.as_view(template_name='login.html'), name='logout'),
     path("account/", account, name="account"),
+    path("account/#", account, name="account"),
     path('registrar/', registroadmin, name='registrar'),
     path('home/Arduino.html', arduino, name='Arduino'),
     path('home/Resistencias.html', resistencias, name='Resistencias'),
@@ -53,7 +54,8 @@ urlpatterns = [
     path('checkout/', FinalizarCompra),
     path('me/', Order, name='order_list'),
     path('<slug:username>/details/<int:id>/<int:numorden>', details),
-       path("detalle/", detal_order, name="detalle"),
+    path("detalle/", detal_order, name="detalle"),
+    path("perfil/", perfil, name="perfil"),
 
 ]
 

@@ -245,9 +245,13 @@
 							<div class="footer">
 								<h3 class="footer-title">Clientes</h3>
 								<ul class="footer-links">
-									<li><a href="usuario.html">Mi Cuenta</a></li>
+									{% if user.is_authenticated%}
+									<li><a href={% url 'perfil' %}>Mi Perfil</a></li>
 									<li><a href="carrito.html">Ver Carrito</a></li>
-									<li><a href="ayuda.html">Ayuda</a></li>
+									{% else %}
+									<li><a href={% url 'login' %}>Mi Perfil</a></li>
+									<li><a href={% url 'login' %}>Ver Carrito</a></li>
+									{% endif %}	
 								</ul>
 							</div>
 						</div>

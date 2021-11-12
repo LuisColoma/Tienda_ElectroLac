@@ -3,7 +3,7 @@ from usuarios.models import Usuario
 from django.contrib.auth.forms import UserChangeForm
 
 class UsuariosForm(forms.Form):
-    photo = forms.ImageField()
+    Fotografia = forms.ImageField()
 
 class EditarPerfilForm(UserChangeForm):
     class Meta:
