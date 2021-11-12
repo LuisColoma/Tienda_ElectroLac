@@ -39,7 +39,8 @@
 					<ul class="header-links pull-right">
 						<!--
 						<li><a href="{% url 'login' %}"><i class="fa fa-user-o"></i> Usuario</a></li>-->
-						<li><a href="{% url 'registrar' %}"><i class="fa fa-user-o"></i> Registrar</a></li>
+						<li><a href=><i class="fa fa-user-o"></i>  Bienvenido, {{ user.username }} </a></li>
+						<li><a href=><i class="fa fa-check-circle" aria-hidden="true"></i>  Mis Ordenes </a></li>
 					</ul>
 				</div>
 			</div>
@@ -65,7 +66,11 @@
 			<div class="container">
 				<div id="responsive-nav">
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="{% url 'home' %}">Inicio</a></li>
+					{% if user.is_authenticated%}
+						<li class="active"><a href="{% url 'account' %}">Inicio</a></li>
+					{% else %}
+						<li class="active"><a href="{% url 'home' %}">Inicio</a></li> 
+					{% endif %}							
 					</ul>
 				</div>
 			</div>
@@ -78,8 +83,10 @@
             <p></p>
             <p></p>
             <p></p>
-            {%if user.is_authenticated%}
-            <label>Cliente: {{user.username}}</label>
+            {%if user.is_authenticated%}            
+                
+				<p><label>Usuario: {{user.username}}</label></p>
+				<p><label></label></p>
             {%endif%}
             <div class="form-group">
                 <label>Nombre de Facturación: </label>
@@ -100,15 +107,27 @@
                   <option name="juegos">Efectivo</option>
                 </select>
             </div>
-			<label>Total: Q{{total_carrito}}</label><br>
-            <div>
-            <label>Fecha de entrega: {{entrega}}</label><br>
+
+			<div class="form-group">
+                <label>Token: 000{{user.id}} </label>
+            <input type="text" name="cliente2" class="form-control" placeholder="Seguridad:  	Ingrese el numero de token sin los ceros" required>
             </div>
-            <button type="submit" class="btn btn-black">Procesar</button>
-            <div>
-                <p></p>
-                </div>
-                <a class="btn btn-outline-info" href="/home" role="button">Regresar</a>
+
+
+			<p><label></label></p>
+			<label>Total a pagar: Q{{total_carrito}}</label><br>
+			<p><label></label></p>
+
+			<div class="row">
+			<div class="col-md-1"><button type="submit" class="btn btn-success">Procesar</button></div>
+			
+			{% if user.is_authenticated%}
+			<div class="col-md-1"><a class="btn btn-danger" href="/account" role="button">Regresar</a></div>
+			{% else %} 
+			<div class="col-md-1"><a class="btn btn-danger" href="/home" role="button">Regresar</a></div>
+			{% endif %} 
+			</div>
+
                 <div>
                    <p></p>
                   {% for message in messages %}

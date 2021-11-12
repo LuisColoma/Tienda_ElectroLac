@@ -51,3 +51,6 @@ def transistores(request):
     products = Product.objects.all()
     context = {'products': products, 'categorys': categorys}
     return render(request, 'interface/transistores.html', context)
+
+def orders(request):
+    return render(request, 'interface/transistores.html')

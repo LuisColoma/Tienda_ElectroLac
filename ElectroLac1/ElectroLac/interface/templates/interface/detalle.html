@@ -33,22 +33,20 @@
 			<div id="encabezado-superior">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a><i class="fa fa-phone"></i> +502 xxxx-xxxx</a></li>
-						<li><a href="modificarcorreo@gmail.com"><i class="fa fa-envelope-o"></i> nuestro@gmail.com</a></li>
 						<li><a href="colocar direccion maps"><i class="fa fa-map-marker"></i> Ciudad de Guatemala</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						{% if user.is_authenticated %}
 						<li><a href=><i class="fa fa-user-o"></i>  Bienvenido, {{ user.username }} </a></li>
 						{% if user.is_staff%}
 						<li><a href="/admin"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Administrar </a></li>
 						{% endif %} 
+						{% if user.is_authenticated%}
 						<li><a href="{% url 'order_list' %}"><i class="fa fa-check-circle" aria-hidden="true"></i>  Mis Ordenes </a></li>
-						<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
-						{%else%}
-						<li><a href="{% url 'login' %}"><i class="fa fa-user-o"></i> Login</a></li> 
+						{% else %} 
+						<li><a href="{% url 'login' %}"><i class="fa fa-check-circle" aria-hidden="true"></i>  Mis Ordenes </a></li>
 						{% endif %} 
-					</ul>	
+						<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
+					</ul>
 				</div>
 			</div>
 
@@ -69,19 +67,10 @@
 							<div class="header-search">
 								<form>
 									<select class="input-select">
-
 										{% for category in categorys %}
 											<option value="0">{{category}}</option>
 										{% endfor %}
 
-										<!--
-										<option value="0">Categorías</option>
-										<option value="1">Proyectos</option>
-										<option value="1">Microcontroladores</option>
-										<option value="1">Electrónica</option>
-										<option value="1">Arduino</option>
-										<option value="1">Bocinas</option>
-										-->
 									</select>
 									<input class="input" placeholder="Artículo a buscar">
 									<button class="search-btn">Buscar</button>
@@ -94,11 +83,12 @@
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
 								<!-- Deseos -->
+
 								<!-- /Deseos -->
 
 								<!-- Carrito -->
 								<div class="dropdown">
-									<a href="carrito.html" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a href="/account/carrito.html" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Carrito</span>
 									</a>
@@ -127,22 +117,12 @@
 			<div class="container">
 				<div id="responsive-nav">
 					<ul class="main-nav nav navbar-nav">
-					{% if user.is_authenticated %}
-						<li class="active"><a href="{% url 'account' %}">Inicio</a></li>
-					{%else%}
-						<li class="active"><a href="{% url 'home' %}">Inicio</a></li>
-					{% endif %}
+						{% if user.is_authenticated %}
+							<li class="active"><a href="{% url 'account' %}">Inicio</a></li>
+						{%else%}
+							<li class="active"><a href="{% url 'home' %}">Inicio</a></li>
+						{% endif %}
 
-						{% for category in categorys %}
-							<li><a href="{{category}}.html">{{category}}</a></li>
-						{% endfor %}
-						<!--
-						<li><a href="proyectos.html">Proyectos</a></li>
-						<li><a href="microcontroladores.html">Microcontroladores</a></li>
-						<li><a href="electronica.html">Electrónica</a></li>
-						<li><a href="arduino.html">Arduino</a></li>
-						<li><a href="bocinas.html">Bocinas</a></li> -->
-					</ul>
 				</div>
 			</div>
 		</nav>
@@ -156,44 +136,41 @@
 
 		<!-- <div class="col-md-12">
 						<div class="section-title text-center"> row -->
-						
-						
-		<!-- <div class="col-md-12">
-						<div class="section-title text-center"> row -->
-		{% for category in categorys %}
-			{% if category.id == 4 %}
-				<div class="col-md-12">
-					<div class="section-title text-center">
-					<h3 class="title">{{category}}</h3>
-					{% for product in products %}
-						{% if category.id == product.category.id %}
-							<div class="col-md-3 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="{{ product.get_photo_url }}" class="img-responsive thumbnail " alt="img">
-									</div>
-									<div class="product-body">	
-										<p class="product-category">{{category}}</p>
-										<h3 class="product-name"><a href="#">{{product.name}}</a></h3>
-										<h4 class="product-price">Q{{product.Amount}}</h4>
-										<h5 class="product-stock">Disponibilidad: {{product.stock}}</h5>
-										<h5 class="product-stock">Disponibilidad: {{arduino.name}}</h5>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
-											<button class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-										</div>
-								</div>
-							</div>
-						</div>
-						{% endif %}							
-					{% endfor %}
-					</div>
-				</div>
-				{%endif%}
-			{% endfor %}
-					
 
+			<div class="section-title text-center">
+					<h3 class="title">Detalle de Productos de la Orden</h3>
+</div>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Total</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+		{% for nombre in nombres %}
+			{% if nombre.id == user.id %}
+				{% for detalle in detalles %}
+					{% if user.id == detalle.usuario_venta_id %}
+						<tr>
+							<td>
+									<div class="col-5">Nombre: {{detalle.cliente}}</div>
+									<div class="col-5">Direccion: {{detalle.direccion}}</div>
+									<div class="col-5">Fecha de entrega: {{detalle.entrega}}</div>
+							</td>
+							<td>Q{{detalle.total}}</td>
+							<td><button type="button" class="btn btn-info"><a href="/{{ user.username }}/details/{{ detalle.id }}">Detalle</button></td>
+						</tr>
+					{% endif %}
+				{% endfor%}
+			{% endif %}
+	{% endfor%}	 
+
+  </tbody>
+</table>
+				
 					<!-- /product -->
 				</div>
 				<!-- /row -->
@@ -232,16 +209,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Categorías</h3>
 								<ul class="footer-links">
-
 									{% for category in categorys %}
-										<li><a href="{{category}}.html">{{category}}</a></li>
+										<li><a href=" /account/{{category}}.html">{{category}}</a></li>
 									{% endfor %}
-
-									<!-- <li><a href="proyectos.html">Proyectos</a></li>
-									<li><a href="microcontroladores.html">Microcontroladores</a></li>
-									<li><a href="electronica.html">Electrónica</a></li>
-									<li><a href="arduino.html">Arduino</a></li>
-									<li><a href="bocinas.html">Bocinas</a></li> -->
 
 								</ul>
 							</div>

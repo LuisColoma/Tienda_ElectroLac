@@ -34,13 +34,14 @@
 			<div id="encabezado-superior">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a><i class="fa fa-phone"></i> +502 xxxx-xxxx</a></li>
-						<li><a href="modificarcorreo@gmail.com"><i class="fa fa-envelope-o"></i> nuestro@gmail.com</a></li>
 						<li><a href="colocar direccion maps"><i class="fa fa-map-marker"></i> Ciudad de Guatemala</a></li>
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href=><i class="fa fa-user-o"></i>  Bienvenido, {{ user.username }} </a></li>
-						<li><a href=><i class="fa fa-check-circle" aria-hidden="true"></i>  Mis Ordenes </a></li>
+						{% if user.is_staff%}
+						<li><a href="/admin"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Administrar </a></li>
+						{% endif %} 
+						<li><a href="{% url 'order_list' %}"><i class="fa fa-check-circle" aria-hidden="true"></i>  Mis Ordenes </a></li>
 						<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
 					</ul>
 				</div>
@@ -80,12 +81,6 @@
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
 								<!-- Deseos -->
-								<div>
-									<a href="listadeseos.html">
-										<i class="fa fa-heart-o"></i>
-										<span>Deseos</span>
-									</a>
-								</div>
 								<!-- /Deseos -->
 
 								<!-- Carrito -->
@@ -252,7 +247,6 @@
 								<ul class="footer-links">
 									<li><a href="usuario.html">Mi Cuenta</a></li>
 									<li><a href="carrito.html">Ver Carrito</a></li>
-									<li><a href="listadeseos.html">Lista de Deseos</a></li>
 									<li><a href="ayuda.html">Ayuda</a></li>
 								</ul>
 							</div>

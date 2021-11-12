@@ -27,7 +27,7 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', home, name = 'home'),
-    path('', home),
+    path('', account),
     path('login/', LoginView.as_view(template_name='interface/login.html'), name='login'),
     path("logout/", LogoutView.as_view(template_name='login.html'), name='logout'),
     path("account/", account, name="account"),
@@ -43,6 +43,7 @@ urlpatterns = [
     path('account/Transistores.html', transistores, name='Transistores'),
     path('account/Motores.html', motores, name='Motores'),
     path('home/carrito.html', Listarcarrito),
+    path('me/carrito.html', Listarcarrito),
     path('carrito/', Listarcarrito),
     path('carrito1/', Listarcarrito1),
     path('account/carrito.html', Listarcarrito1, name='carrito1'),
@@ -50,7 +51,10 @@ urlpatterns = [
     path('account/eliminacionProducto/<int:id>', eliminar_carrito),
     path('carrito1/eliminacionProducto/<int:id>', eliminar_carrito),
     path('checkout/', FinalizarCompra),
-    path('me/', login_required(OrderList.as_view(), login_url='/autenticacion/acceder'), name='order_list'),
+    path('me/', Order, name='order_list'),
+    path('<slug:username>/details/<int:id>/<int:numorden>', details),
+       path("detalle/", detal_order, name="detalle"),
+
 ]
 
 if settings.DEBUG:
