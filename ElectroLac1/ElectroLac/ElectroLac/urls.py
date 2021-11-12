@@ -58,9 +58,9 @@ urlpatterns = [
     path("detalle/", detal_order, name="detalle"),
     path("perfil/", perfil, name="perfil"),
     path('reporte-login/', pdflogin,name='pdflogin'),
-    path('reporte-intentos/', pdfattempts),
-    path('reporte-inventario/', pdfinventario),
-    path('reporte-ventas/', pdfventas),
+    path('reporte-intentos/', pdfattempts, name = 'intentos'),
+    path('reporte-inventario/', pdfinventario,name = 'inventario'),
+    path('reporte-ventas/', pdfventas, name = 'pdfventas'),
 
 ]
 

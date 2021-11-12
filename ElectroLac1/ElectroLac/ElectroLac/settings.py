@@ -147,7 +147,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
       
     "/Users/lcolo/Desktop/PFINAL_Django/ElectroLac1/ElectroLac/static"
-    "django\Pruebas\Tienda_ElectroLac\ElectroLac1\ElectroLac\static" 
+    #"django\Pruebas\Tienda_ElectroLac\ElectroLac1\ElectroLac\static" 
  
 ]
 
@@ -158,7 +158,7 @@ CRISPY_TEMPLATE_PACK='bootstrap4'
 MEDIA_ROOT = '/Users/lcolo/Desktop/PFINAL_Django/ElectroLac1/ElectroLac/media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-MEDIA_ROOT ='django\Pruebas\Tienda_ElectroLac\ElectroLac1\ElectroLac\media'
+#MEDIA_ROOT ='django\Pruebas\Tienda_ElectroLac\ElectroLac1\ElectroLac\media'
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
 
