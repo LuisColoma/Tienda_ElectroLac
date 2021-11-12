@@ -23,6 +23,7 @@ from usuarios.views import *
 from interface.views import *
 from venta.views import *
 from django.contrib.auth.decorators import login_required
+from reporte.views import pdflogin, pdfattempts,pdfinventario,pdfventas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -56,6 +57,10 @@ urlpatterns = [
     path('<slug:username>/details/<int:id>/<int:numorden>', details),
     path("detalle/", detal_order, name="detalle"),
     path("perfil/", perfil, name="perfil"),
+    path('reporte-login/', pdflogin,name='pdflogin'),
+    path('reporte-intentos/', pdfattempts),
+    path('reporte-inventario/', pdfinventario),
+    path('reporte-ventas/', pdfventas),
 
 ]
 
