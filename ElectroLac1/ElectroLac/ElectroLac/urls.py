@@ -24,12 +24,14 @@ from interface.views import *
 from venta.views import *
 from django.contrib.auth.decorators import login_required
 from reporte.views import pdflogin, pdfattempts,pdfinventario,pdfventas
+from faceRecog.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', home, name = 'home'),
     path('', account),
     path('login/', LoginView.as_view(template_name='interface/login.html'), name='login'),
+ ###   path('login/', LoginView.as_view2(template_name='interface/logindetect.html'), name='login'),
     path("logout/", LogoutView.as_view(template_name='login.html'), name='logout'),
     path("account/", account, name="account"),
     path("account/#", account, name="account"),
@@ -44,7 +46,7 @@ urlpatterns = [
     path('account/Capacitores.html', capacitores, name='Capacitores'),
     path('account/Transistores.html', transistores, name='Transistores'),
     path('account/Motores.html', motores, name='Motores'),
-    path('home/carrito.html', Listarcarrito),
+    path('home/carrito.html', Listarcarrito, name = 'carrito'),
     path('me/carrito.html', Listarcarrito),
     path('carrito/', Listarcarrito),
     path('carrito1/', Listarcarrito1),
@@ -57,10 +59,14 @@ urlpatterns = [
     path('<slug:username>/details/<int:id>/<int:numorden>', details),
     path("detalle/", detal_order, name="detalle"),
     path("perfil/", perfil, name="perfil"),
+    path("detect/perfil/<int:id>", deteccion, name="deteccion"),
     path('reporte-login/', pdflogin,name='pdflogin'),
     path('reporte-intentos/', pdfattempts, name = 'intentos'),
     path('reporte-inventario/', pdfinventario,name = 'inventario'),
     path('reporte-ventas/', pdfventas, name = 'pdfventas'),
+    path('perfil/create_dataset/', create_dataset),
+    path('trainer/', trainer),
+    path('detect/', detect),
 
 ]
 

@@ -96,7 +96,10 @@ class Ordenes(models.Model):
     def __str__(self):
         return f'{self.cliente}'
 
+
+#class Detecciones(models.Model):
+#    usuario = models.CharField(max_length=100, default="")
+#    usuario_id = models.IntegerField(blank=True, null=True)
+#
 #    def productos_carrito(self):
 #        return self.productos.all()
-
-

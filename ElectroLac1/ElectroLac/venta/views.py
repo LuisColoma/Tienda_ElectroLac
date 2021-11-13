@@ -29,7 +29,7 @@ def Listarcarrito(request):
         total_carrito = re.findall("\d+\.\d+",total)
         tot = total_carrito[0]
     else:
-        tot = format(0.00, '.2f')
+        tot = format(0.00, '.2f') 
     productoslistados = Carrito.objects.all() 
     return render(request, "interface/carrito.html", {"total_carrito": tot, "carrito": productoslistados})
 
@@ -98,3 +98,17 @@ def details(request, id,username,numorden):
 def detal_order(request):
     
     return render(request, 'interface/detalle.html')
+
+def deteccion(request, id):
+    #usuarios= Usuario.objects.get(id=id)
+    #compra = Ordenes.objects.create(usuario = usuarios.name, usuario_id = usuarios.id)
+    #compra.save();
+    #print("Usuario registrado")
+    return redirect('/account')
+
+def deteccion(request, id):
+    record = Usuario.objects.get(id=id)
+    context = {
+        'record' : record
+    }
+    return render(request, 'interface/details.html', context)

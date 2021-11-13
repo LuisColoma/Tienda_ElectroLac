@@ -132,18 +132,14 @@
 
 								<!-- Carrito -->
 								<div class="dropdown">
-								{% if user.is_authenticated %}
-									<a href="carrito.html" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									{% if user.is_authenticated%}
+										<button type="button" class="btn btn-light"><a href="carrito.html" >Carrito</button>
+									{% else %} 
+										<a href="/login" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Carrito</span>
-										</a>
-								{%else%}
-									<a href="carrito.html" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<i class="fa fa-shopping-cart"></i>
-										<span>Carrito</span>
-								{% endif %}								
-									</a>
-								</div>
+									{% endif %} 
+
 								<!-- /Carrito -->
 
 								<!-- Menu Toogle -->
@@ -168,7 +164,7 @@
 			<div class="container">
 				<div id="responsive-nav">
 					<ul class="main-nav nav navbar-nav">
-							<li class="active"><a href={% url 'account' %}>Inicio</a></li>
+							<li class="active"><a href="/account/">Inicio</a></li>
 
 						{% for category in categorys %}
 							<li><a href="{{category}}.html">{{category}}</a></li>
@@ -249,8 +245,8 @@
 								<p>Nos dedicamos a ofrecerte componentes electronicos al mejor precio del mercado.</p>
 								<ul class="footer-links">
 									<li><a href="https://goo.gl/maps/N4Cdk8s9FdN2"><i class="fa fa-map-marker"></i>Ciudad de Guatemela</a></li>
-									<li><a><i class="fa fa-phone"></i>+504 xxxx-xxxx</a></li>
-									<li><a href="mailto:temstorehn@gmail.com"><i class="fa fa-envelope-o"></i> correo@gmail.com</a></li>
+									<li><a><i class="fa fa-phone"></i>+504 5161-2538</a></li>
+									<li><a href="mailto:temstorehn@gmail.com"><i class="fa fa-envelope-o"></i> Electrolac@gmail.com.gt</a></li>
 								</ul>
 							</div>
 						</div>
@@ -293,8 +289,8 @@
 								<h3 class="footer-title">Clientes</h3>
 								<ul class="footer-links">
 									{% if user.is_authenticated%}
-									<li><a href={% url 'perfil' %}>Mi Perfil</a></li>
-									<li><a href="carrito.html">Ver Carrito</a></li>
+									<li><a href={% url 'perfil' %}>Mi Perfil</a></li>  
+									<li><a href={% url 'carrito' %}>Ver Carrito</a></li>
 									{% else %}
 									<li><a href={% url 'login' %}>Mi Perfil</a></li>
 									<li><a href={% url 'login' %}>Ver Carrito</a></li>

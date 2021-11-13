@@ -61,3 +61,4 @@ def perfil(request):
     informacion = Usuario.objects.all()
     context = {'informacion': informacion,'categorys': categorys}
     return render(request, 'interface/perfil.html', context)
+

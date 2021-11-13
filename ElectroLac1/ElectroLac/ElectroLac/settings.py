@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'interface',
     'venta',
     'reporte',
+    'rostrodect'
 ]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'

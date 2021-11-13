@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from usuarios.forms import UsuariosForm
 from usuarios.models import Usuario
 from django.contrib import messages
+from usuarios.models import Usuario
+from venta.models import  *
 
 # Create your views here.
 
@@ -43,3 +45,17 @@ def form_photo(request):
     context = {}
     context['form'] = UsuariosForm()
     return render(request, "usuarios/registrar.html", context)
+
+
+#def login_foto(request, id,username,numorden):
+#    categorys = Category.objects.all()
+#    detalles = Venta.objects.all()
+#    productoslistados = Carrito.objects.all()
+#    productos= Product.objects.get(id=id) 
+#    usuario = Usuario.objects.get(username=username)
+#    numorden = Venta.objects.get(numorden=numorden)
+#    #direccion = Venta.objects.get(direccion=direccion)
+#    compra = Ordenes.objects.create(cliente=cliente.username, producto = productos.name, numorden = numorden.numorden)
+#    compra.save();
+#    print("Usuario registrado")
+#    return redirect('/detalle')

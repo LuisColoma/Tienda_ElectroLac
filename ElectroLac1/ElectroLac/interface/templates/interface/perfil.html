@@ -26,6 +26,10 @@
 
 		<!-- Hoja de estilo personalizada -->
 		<link type="text/css" rel="stylesheet" href="{% static 'css\custom.css' %}"/>
+
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+		
     </head>
 	<body>
 		<!-- HEADER -->
@@ -170,7 +174,47 @@
 					</div>
 				</div>
 
-			
+			<div class="col-md-4">
+				<button type="button"  data-toggle="modal" data-target="#myModal">Registrar Rostro</button>
+				</button>
+        	</div>
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Ingrese su identificación única (descrita a continuación) y espere a la cámara web </h4>
+			</div>
+			<div class="modal-body">
+				<ul>
+					<li> Para mayor precisión, asegúrese de permanecer en una habitación con buena iluminación. </li>
+					<li> Quite cualquier tipo de accesorio de la cara. </li>
+					<li> Asegúrate de que tu cara esté claramente visible en la cámara. </li>
+					<li> Asegúrese de que su cabello no bloquee la cara. </li>
+					<li> Asegúrese de que no haya otras caras dentro del marco de la cámara. 
+				</ul>
+				<hr/>
+				<form action="create_dataset/" method="POST">
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="inputId">Ingrese su ID único de usuario, su ID es: {{user.id}} </label>
+					<input type="text" class="form-control" name="userId" id="inputId" placeholder="Enter Id">
+				</div>
+				<button type="submit" class="btn btn-warning">Enviar</button>
+				</form>
+			</div>
+			</div>
+		</div>
+		</div>
+		</div>
+
+
+				
+				
+				
+				
+				
 					<!-- /product -->
 				</div>
 				<!-- /row -->
